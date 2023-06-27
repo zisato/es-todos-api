@@ -1,0 +1,6 @@
+api:
+  api_problem:
+    enabled: true
+    exception_handlers:
+      - EsTodosApi\Infrastructure\ExceptionHandler\Strategy\NotFoundExceptionHandler
+      - EsTodosApi\Infrastructure\ExceptionHandler\Strategy\DuplicatedAggregateIdExceptionHandler

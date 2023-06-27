@@ -1,0 +1,39 @@
+<?php
+
+declare(strict_types=1);
+
+namespace EsTodosApi\Infrastructure\Symfony\MessageHandler\Bus;
+
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\Exception\DelayedMessageHandlingException;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Zisato\CQRS\WriteModel\Service\CommandBus;
+use Zisato\CQRS\WriteModel\ValueObject\Command;
+
+class MessengerCommandBus implements CommandBus
+{
+    private MessageBusInterface $commandBus;
+
+    public function __construct(MessageBusInterface $commandBus)
+    {
+        $this->commandBus = $commandBus;
+    }
+
+    public function handle(Command $command): void
+    {
+        $envelope = new Envelope($command);
+
+        try {
+            $envelope = $this->commandBus->dispatch($envelope);
+        } catch (HandlerFailedException $exception) {
+            $firstException = current($exception->getNestedExceptions());
+
+            throw $firstException;
+        } catch (DelayedMessageHandlingException $exception) {
+            $firstException = current($exception->getExceptions());
+
+            throw $firstException;
+        }
+    }
+}

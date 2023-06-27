@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    EsTodosApi\Tests\Functional\Context\:
+        resource: '../tests/Functional/Context/*'

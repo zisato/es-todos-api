@@ -1,0 +1,143 @@
+version: "3.7"
+services:
+  php:
+    build:
+      context: ./php-8.1
+      target: php
+    command: ["php", "-S", "0.0.0.0:8080", "-t", "/var/www/public"]
+    environment:
+      - APP_ENV=dev
+      - APP_DEBUG=false
+      - APP_SECRET=7e7e05f63041d6f89d2aada4c5ea41bc
+      - DATABASE_URL=mysql://root:root@mysql:3306/todos
+      - DATABASE_HOST=mysql
+      - DATABASE_PORT=3306
+      - MESSENGER_TRANSPORT_DSN=doctrine://default
+      - MONGO_URL=mongodb://root:root@mongodb:27017
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+    links:
+      - mysql
+      - mongodb
+    ports:
+      - 8080:8080
+    volumes:
+      - ../:/var/www:delegated
+    working_dir: /var/www/
+
+  messenger-event-consumer:
+    build:
+      context: ./php-8.1
+      target: php
+    command: ["php", "bin/console", "messenger:consume", "-vv", "--bus", "event.bus"]
+    environment:
+      - APP_ENV=dev
+      - APP_DEBUG=false
+      - APP_SECRET=7e7e05f63041d6f89d2aada4c5ea41bc
+      - DATABASE_URL=mysql://root:root@mysql:3306/todos
+      - DATABASE_HOST=mysql
+      - DATABASE_PORT=3306
+      - MESSENGER_TRANSPORT_DSN=doctrine://default
+      - MONGO_URL=mongodb://root:root@mongodb:27017
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+    links:
+      - mysql
+      - mongodb
+    volumes:
+      - ../:/var/www:delegated
+    working_dir: /var/www/
+
+  php-cli:
+    build:
+      context: ./php-8.1
+      target: php-cli
+    environment:
+      - APP_ENV=test
+      - APP_SECRET=7e7e05f63041d6f89d2aada4c5ea41bc
+      - DATABASE_URL=mysql://root:root@mysql:3306/todos
+      - DATABASE_HOST=mysql
+      - DATABASE_PORT=3306
+      - MESSENGER_TRANSPORT_DSN=doctrine://default
+      - MONGO_URL=mongodb://root:root@mongodb:27017
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+    links:
+      - mysql
+      - mongodb
+    volumes:
+      - ../:/var/www:delegated
+    working_dir: /var/www/
+  
+  php-cli-pcov:
+    build:
+      context: ./php-8.1
+      target: php-cli-pcov
+    environment:
+      - APP_ENV=test
+      - APP_SECRET=7e7e05f63041d6f89d2aada4c5ea41bc
+      - DATABASE_URL=mysql://root:root@mysql:3306/todos
+      - DATABASE_HOST=mysql
+      - DATABASE_PORT=3306
+      - MESSENGER_TRANSPORT_DSN=doctrine://default
+      - MONGO_URL=mongodb://root:root@mongodb:27017
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+    links:
+      - mysql
+      - mongodb
+    volumes:
+      - ../:/var/www:delegated
+    working_dir: /var/www/
+  
+  php-cli-xdebug:
+    build:
+      context: ./php-8.1
+      target: php-cli-xdebug
+    environment:
+      - APP_ENV=test
+      - APP_SECRET=7e7e05f63041d6f89d2aada4c5ea41bc
+      - DATABASE_URL=mysql://root:root@mysql:3306/todos
+      - DATABASE_HOST=mysql
+      - DATABASE_PORT=3306
+      - MESSENGER_TRANSPORT_DSN=doctrine://default
+      - MONGO_URL=mongodb://root:root@mongodb:27017
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - XDEBUG_MODE=debug
+      - XDEBUG_CONFIG=client_host=host.docker.internal client_port=9003
+    links:
+      - mysql
+      - mongodb
+    volumes:
+      - ../:/var/www:delegated
+    working_dir: /var/www/
+
+  mysql:
+    build:
+      context: ./php-8.1
+      target: mysql
+    environment:
+      - MYSQL_DATABASE=todos
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql:/var/lib/mysql
+
+  mongodb:
+    build:
+      context: ./php-8.1
+      target: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - 27017:27017
+    restart: always
+    volumes:
+      - mongodb:/data/db
+
+volumes:
+  mysql:
+  mongodb:

@@ -1,0 +1,4 @@
+homepage:
+    path: /
+    controller: EsTodosApi\Infrastructure\Controller\HomepageController::execute
+    methods: [ GET ]

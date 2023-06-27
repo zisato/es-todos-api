@@ -1,0 +1,80 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    _instanceof:
+        Zisato\CQRS\WriteModel\Service\CommandHandler:
+            tags:
+                - { name: messenger.message_handler, bus: command.bus }
+
+        Zisato\CQRS\ReadModel\Service\QueryHandler:
+            tags:
+                - { name: messenger.message_handler, bus: query.bus }
+
+        EsTodosApi\Infrastructure\MessageHandler\EventHandler:
+            tags:
+                - { name: messenger.message_handler, bus: event.bus }
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    EsTodosApi\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    EsTodosApi\Infrastructure\Todo\Controller\:
+        resource: '../src/Infrastructure/Todo/Controller'
+        tags: ['controller.service_arguments']
+
+    EsTodosApi\Infrastructure\User\Controller\:
+        resource: '../src/Infrastructure/User/Controller'
+        tags: ['controller.service_arguments']
+
+    Doctrine\DBAL\Connection:
+        public: true
+        factory: Doctrine\DBAL\DriverManager::getConnection
+        arguments:
+            $params:
+                driver: pdo_mysql
+                url: '%env(DATABASE_URL)%'
+                charset: UTF8
+
+    MongoDB\Client:
+        public: true
+        arguments:
+            - '%env(MONGO_URL)%'
+
+    Zisato\CQRS\WriteModel\Service\CommandBus:
+        class: EsTodosApi\Infrastructure\Symfony\MessageHandler\Bus\MessengerCommandBus
+        arguments:
+            - '@command.bus'
+
+    Zisato\CQRS\ReadModel\Service\QueryBus:
+        class: EsTodosApi\Infrastructure\Symfony\MessageHandler\Bus\MessengerQueryBus
+        arguments:
+            - '@query.bus'
+
+    Zisato\EventSourcing\Aggregate\Event\Bus\EventBusInterface:
+        class: EsTodosApi\Infrastructure\Symfony\MessageHandler\Bus\MessengerEventBus
+        arguments:
+            - '@event.bus'
+
+    EsTodosApi\Infrastructure\CrazyPrivateDataPayloadService:
+        arguments:
+            - '@Zisato\EventSourcing\Aggregate\Event\PrivateData\Service\CryptoPrivateDataPayloadService'
+            - '@Zisato\EventSourcing\Aggregate\Event\PrivateData\Service\ExternalPrivateDataPayloadService'
+
+    Zisato\EventSourcing\Aggregate\Event\PrivateData\Service\PrivateDataPayloadServiceInterface: '@EsTodosApi\Infrastructure\CrazyPrivateDataPayloadService'

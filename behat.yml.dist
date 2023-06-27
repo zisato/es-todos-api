@@ -1,0 +1,25 @@
+default:
+    suites:
+        functional:
+            paths:
+                - '%paths.base%/tests/Functional/Feature'
+            contexts:
+                - EsTodosApi\Tests\Functional\Context\MainContext
+                - EsTodosApi\Tests\Functional\Context\TodoContext
+                - EsTodosApi\Tests\Functional\Context\UserContext
+
+    extensions:
+        FriendsOfBehat\SymfonyExtension:
+            kernel:
+                class: EsTodosApi\Kernel
+                environment: test
+                path: '%paths.base%/src/Kernel.php'
+
+coverage:
+    suites:
+        functional:
+            contexts:
+                - EsTodosApi\Tests\Functional\Context\CoverageContext
+                - EsTodosApi\Tests\Functional\Context\MainContext
+                - EsTodosApi\Tests\Functional\Context\TodoContext
+                - EsTodosApi\Tests\Functional\Context\UserContext

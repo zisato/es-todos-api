@@ -1,0 +1,3 @@
+event_sourcing:
+  private_data:
+    payload_service: EsTodosApi\Infrastructure\CrazyPrivateDataPayloadService

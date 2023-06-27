@@ -1,0 +1,24 @@
+user_list:
+    path: /users
+    controller: EsTodosApi\Infrastructure\User\Controller\ListUsersController::execute
+    methods: [ GET ]
+
+user_create:
+    path: /users
+    controller: EsTodosApi\Infrastructure\User\Controller\CreateUserController::execute
+    methods: [ POST ]
+
+user_detail:
+    path: /users/{id}
+    controller: EsTodosApi\Infrastructure\User\Controller\DetailUserController::execute
+    methods: [ GET ]
+
+user_update:
+    path: /users/{id}
+    controller: EsTodosApi\Infrastructure\User\Controller\UpdateUserController::execute
+    methods: [ PUT ]
+
+user_delete:
+    path: /users/{id}
+    controller: EsTodosApi\Infrastructure\User\Controller\DeleteUserController::execute
+    methods: [ DELETE ]

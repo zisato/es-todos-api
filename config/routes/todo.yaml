@@ -1,0 +1,24 @@
+todo_list:
+    path: /todos
+    controller: EsTodosApi\Infrastructure\Todo\Controller\ListTodosController::execute
+    methods: [ GET ]
+
+todo_create:
+    path: /todos
+    controller: EsTodosApi\Infrastructure\Todo\Controller\CreateTodoController::execute
+    methods: [ POST ]
+
+todo_detail:
+    path: /todos/{id}
+    controller: EsTodosApi\Infrastructure\Todo\Controller\DetailTodoController::execute
+    methods: [ GET ]
+
+todo_update:
+    path: /todos/{id}
+    controller: EsTodosApi\Infrastructure\Todo\Controller\UpdateTodoController::execute
+    methods: [ PUT ]
+
+todo_delete:
+    path: /todos/{id}
+    controller: EsTodosApi\Infrastructure\Todo\Controller\DeleteTodoController::execute
+    methods: [ DELETE ]

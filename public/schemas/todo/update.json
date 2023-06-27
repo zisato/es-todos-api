@@ -1,0 +1,31 @@
+{
+  "type":"object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data":{
+      "type":"object",
+      "required": [
+        "attributes"
+      ],
+      "properties":{
+        "attributes":{
+          "type":"object",
+          "required":[
+            "title",
+            "description"
+          ],
+          "properties":{
+            "title":{
+              "type":"string"
+            },
+            "description":{
+              "type":["string", "null"]
+            }
+          }
+        }
+      }
+    }
+  }
+}
