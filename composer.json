@@ -82,6 +82,8 @@
     "zisato/projection-mongodb": "@dev"
   },
   "scripts": {
+    "test:unit": "tests/run.sh unit",
+    "test:functional": "tests/run.sh functional",
     "auto-scripts": {
       "cache:clear": "symfony-cmd",
       "assets:install %PUBLIC_DIR%": "symfony-cmd"

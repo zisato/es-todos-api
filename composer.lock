@@ -5088,12 +5088,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:zisato/event-sourcing-bundle.git",
-                "reference": "8a1979bfc083540e628f3a85a25a8dcddad32476"
+                "reference": "3757e736e3e2f0425ef2e2a3376a7dd2ce5262d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zisato/event-sourcing-bundle/zipball/8a1979bfc083540e628f3a85a25a8dcddad32476",
-                "reference": "8a1979bfc083540e628f3a85a25a8dcddad32476",
+                "url": "https://api.github.com/repos/zisato/event-sourcing-bundle/zipball/3757e736e3e2f0425ef2e2a3376a7dd2ce5262d0",
+                "reference": "3757e736e3e2f0425ef2e2a3376a7dd2ce5262d0",
                 "shasum": ""
             },
             "require": {
@@ -5137,7 +5137,7 @@
                 "source": "https://github.com/zisato/event-sourcing-bundle/tree/main",
                 "issues": "https://github.com/zisato/event-sourcing-bundle/issues"
             },
-            "time": "2023-06-24T23:41:29+00:00"
+            "time": "2023-06-27T16:43:02+00:00"
         },
         {
             "name": "zisato/event-sourcing-dbal",
