@@ -38,7 +38,7 @@ class ListTodosQueryHandlerTest extends TestCase
         ];
         $collection = ProjectionModelCollection::create(2, $values);
         $this->todoProjectionRepository->expects($this->once())
-            ->method('findBy')
+            ->method('findAll')
             ->willReturn($collection);
         $expectedResult = [
             [

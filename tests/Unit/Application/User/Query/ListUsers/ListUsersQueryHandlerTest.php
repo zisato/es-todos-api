@@ -37,7 +37,7 @@ class ListUsersQueryHandlerTest extends TestCase
         ];
         $collection = ProjectionModelCollection::create(2, $values);
         $this->userProjectionRepository->expects($this->once())
-            ->method('findBy')
+            ->method('findAll')
             ->willReturn($collection);
         $expectedResult = [
             [

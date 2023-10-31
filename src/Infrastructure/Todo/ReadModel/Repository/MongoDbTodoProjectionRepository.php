@@ -6,7 +6,11 @@ namespace EsTodosApi\Infrastructure\Todo\ReadModel\Repository;
 
 use EsTodosApi\Domain\Todo\ReadModel\Repository\TodoProjectionRepository;
 use EsTodosApi\Domain\Todo\ReadModel\TodoProjectionModel;
+use Zisato\Projection\Criteria\Condition;
+use Zisato\Projection\Criteria\Criteria;
+use Zisato\Projection\Criteria\CriteriaItem;
 use Zisato\Projection\Infrastructure\MongoDB\Repository\MongoDBRepository;
+use Zisato\Projection\ValueObject\ProjectionModelCollection;
 
 class MongoDbTodoProjectionRepository extends MongoDBRepository implements TodoProjectionRepository
 {
@@ -27,6 +31,16 @@ class MongoDbTodoProjectionRepository extends MongoDBRepository implements TodoP
     public function getCollectionName(): string
     {
         return self::COLLECTION_NAME;
+    }
+
+    public function findAll(int $offset, int $limit): ProjectionModelCollection
+    {
+        return $this->findBy(null, $offset, $limit);
+    }
+
+    public function findByUserId(string $userId): ProjectionModelCollection
+    {
+        return $this->findBy(new Criteria(new CriteriaItem('userId', $userId, Condition::eq())));
     }
 
     public function get(string $id): TodoProjectionModel

@@ -16,7 +16,7 @@ class ListUsersQueryHandler implements QueryHandler
     {
         $offset = (($query->page() - 1) * $query->perPage());
 
-        $usersCollection = $this->userProjectionRepository->findBy(null, $offset, $query->perPage());
+        $usersCollection = $this->userProjectionRepository->findAll($offset, $query->perPage());
 
         return ListUsersQueryResult::create($usersCollection, new UserJsonApiTransformer(), $query->page(), $query->perPage());
     }

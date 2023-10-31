@@ -16,7 +16,7 @@ class ListTodosQueryHandler implements QueryHandler
     {
         $offset = (($query->page() - 1) * $query->perPage());
 
-        $todosCollection = $this->todoProjectionRepository->findBy(null, $offset, $query->perPage());
+        $todosCollection = $this->todoProjectionRepository->findAll($offset, $query->perPage());
 
         return ListTodosQueryResult::create($todosCollection, new TodoJsonApiTransformer(), $query->page(), $query->perPage());
     }

@@ -5,18 +5,13 @@ declare(strict_types=1);
 namespace EsTodosApi\Domain\User\ReadModel\Repository;
 
 use EsTodosApi\Domain\User\ReadModel\UserProjectionModel;
-use Zisato\Projection\Criteria\Criteria;
-use Zisato\Projection\OrderBy\OrderBy;
 use Zisato\Projection\ValueObject\ProjectionModelCollection;
 
 interface UserProjectionRepository
 {
-    public function findBy(
-        ?Criteria $criteria = null,
-        ?int $offset = null,
-        ?int $limit = null,
-        ?OrderBy $orderBy = null
-    ): ProjectionModelCollection;
+    public function findAll(int $offset, int $limit): ProjectionModelCollection;
+
+    public function findByIdentification(string $identification): ?UserProjectionModel;
 
     public function get(string $id): UserProjectionModel;
 

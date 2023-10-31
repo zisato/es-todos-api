@@ -33,7 +33,6 @@ Feature:
       }
     """
 
-  @debug
   Scenario: It returns error when not exists
     When I call "PUT" "/users/0e122660-0b22-11ee-be56-0242ac120002" with body:
     """
