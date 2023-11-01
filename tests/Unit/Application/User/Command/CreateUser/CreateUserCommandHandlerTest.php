@@ -5,9 +5,8 @@ namespace EsTodosApi\Tests\Unit\Application\User\Command\CreateUser;
 use EsTodosApi\Application\User\Command\CreateUser\CreateUserCommandHandler;
 use EsTodosApi\Application\User\Command\CreateUser\CreateUserCommand;
 use EsTodosApi\Domain\User\WriteModel\Repository\UserRepository;
-use EsTodosApi\Domain\User\WriteModel\Service\UserIdentificationService;
+use EsTodosApi\Domain\User\WriteModel\User;
 use EsTodosApi\Domain\User\WriteModel\ValueObject\Identification;
-use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Zisato\EventSourcing\Aggregate\Identity\UUID;
@@ -17,52 +16,30 @@ use Zisato\EventSourcing\Aggregate\Identity\UUID;
  */
 class CreateUserCommandHandlerTest extends TestCase
 {
-    private UserIdentificationService|MockObject $userIdentificationService;
     private UserRepository|MockObject $userRepository;
     private CreateUserCommandHandler $commandHandler;
 
     protected function setUp(): void
     {
-        $this->userIdentificationService = $this->createMock(UserIdentificationService::class);
         $this->userRepository = $this->createMock(UserRepository::class);
-        $this->commandHandler = new CreateUserCommandHandler($this->userIdentificationService, $this->userRepository);
+        $this->commandHandler = new CreateUserCommandHandler($this->userRepository);
     }
 
-    public function testShouldCallUserServiceExistsIdentificationWithArguments(): void
+    public function testShouldSaveUser(): void
     {
         $id = UUID::generate();
         $identification = Identification::fromValue('User identification');
         $name = 'User name';
 
-        $this->userIdentificationService->expects($this->once())
-            ->method('existsIdentification')
-            ->with(
-                $this->equalTo($identification)
-            )
-            ->willReturn(false);
+        $this->userRepository->expects($this->once())
+            ->method('save')
+            ->willReturnCallback(function (User $user) use ($id) {
+                $this->assertEquals($id, $user->id());
+
+                return true;
+            });
 
         $command = new CreateUserCommand($id->value(), $identification->value(), $name);
-
-        $this->commandHandler->__invoke($command);
-    }
-
-    public function testShouldThrowInvalidArgumentExceptionWhenExistingUserIdentification(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $id = UUID::generate();
-        $identification = Identification::fromValue('User identification');
-        $name = 'User name';
-
-        $this->userIdentificationService->expects($this->once())
-            ->method('existsIdentification')
-            ->with(
-                $this->equalTo($identification)
-            )
-            ->willReturn(true);
-
-        $command = new CreateUserCommand($id->value(), $identification->value(), $name);
-
         $this->commandHandler->__invoke($command);
     }
 }
