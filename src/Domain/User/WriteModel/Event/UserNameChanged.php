@@ -18,7 +18,7 @@ class UserNameChanged extends AbstractEvent
 
     public static function defaultVersion(): int
     {
-        return static::DEFAULT_VERSION;
+        return self::DEFAULT_VERSION;
     }
 
     public static function create(IdentityInterface $aggregateId, Name $previousName, Name $newName): self

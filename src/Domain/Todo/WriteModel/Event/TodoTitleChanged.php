@@ -18,7 +18,7 @@ class TodoTitleChanged extends AbstractEvent
 
     public static function defaultVersion(): int
     {
-        return static::DEFAULT_VERSION;
+        return self::DEFAULT_VERSION;
     }
 
     public static function create(IdentityInterface $aggregateId, Title $previousTitle, Title $newTitle): self

@@ -40,17 +40,17 @@ class Name
     {
         $length = \strlen(trim($value));
 
-        if ($length < static::LENGTH_MIN) {
+        if ($length < self::LENGTH_MIN) {
             throw new InvalidArgumentException(\sprintf(
                 'Invalid Name min length. Min length allowed: %d',
-                static::LENGTH_MIN
+                self::LENGTH_MIN
             ));
         }
 
-        if ($length > static::LENGTH_MAX) {
+        if ($length > self::LENGTH_MAX) {
             throw new InvalidArgumentException(\sprintf(
                 'Invalid Name max length. Max length allowed: %d',
-                static::LENGTH_MAX
+                self::LENGTH_MAX
             ));
         }
     }

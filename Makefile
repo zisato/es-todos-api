@@ -99,10 +99,10 @@ phpstan:
 	@$(DOCKER_COMPOSE_TEST) run --rm --no-deps php bin/phpstan
 
 rector:
-	@$(DOCKER_COMPOSE_TEST) run --rm --no-deps php bin/rector process src
+	@$(DOCKER_COMPOSE_TEST) run --rm --no-deps php bin/rector process src --dry-run
 
 ecs:
-	@$(DOCKER_COMPOSE_TEST) run --rm --no-deps php bin/ecs check src --fix
+	@$(DOCKER_COMPOSE_TEST) run --rm --no-deps php bin/ecs check src
 
 code.quality: rector ecs phpstan
 

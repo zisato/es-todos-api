@@ -50,7 +50,10 @@ class MongoDbUserProjectionRepository extends MongoDBRepository implements UserP
             return null;
         }
 
-        return iterator_to_array($collection->data())[0];
+        /** @var UserProjectionModel $userProjectionModel */
+        $userProjectionModel = iterator_to_array($collection->data())[0];
+
+        return $userProjectionModel;
     }
 
     public function get(string $id): UserProjectionModel
