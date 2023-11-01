@@ -22,7 +22,7 @@ final class TodoProjectionModel extends ProjectionModel
             'id' => $id->value(),
             'userId' => $userId->value(),
             'title' => $title->value(),
-            'description' => $description instanceof \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description
+            'description' => $description instanceof Description
                 ? $description->value()
                 : null,
         ]);
@@ -63,7 +63,7 @@ final class TodoProjectionModel extends ProjectionModel
     {
         $newData = $this->data();
 
-        $description = $newDescription instanceof \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description ? $newDescription->value() : null;
+        $description = $newDescription instanceof Description ? $newDescription->value() : null;
         $newData['description'] = $description;
 
         $this->changeData($newData);

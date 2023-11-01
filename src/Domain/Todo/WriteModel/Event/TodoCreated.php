@@ -37,7 +37,7 @@ final class TodoCreated extends AbstractEvent
             [
                 self::INDEX_USER_ID => $userId->value(),
                 self::INDEX_TITLE => $title->value(),
-                self::INDEX_DESCRIPTION => $description instanceof \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description
+                self::INDEX_DESCRIPTION => $description instanceof Description
                     ? $description->value()
                     : null,
             ]

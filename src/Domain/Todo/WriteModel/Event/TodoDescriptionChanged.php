@@ -30,10 +30,10 @@ final class TodoDescriptionChanged extends AbstractEvent
         $event = self::occur(
             $aggregateId->value(),
             [
-                self::INDEX_PREVIOUS_VALUE => $previousDescription instanceof \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description
+                self::INDEX_PREVIOUS_VALUE => $previousDescription instanceof Description
                     ? $previousDescription->value()
                     : null,
-                self::INDEX_NEW_VALUE => $newDescription instanceof \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description
+                self::INDEX_NEW_VALUE => $newDescription instanceof Description
                     ? $newDescription->value()
                     : null,
             ]

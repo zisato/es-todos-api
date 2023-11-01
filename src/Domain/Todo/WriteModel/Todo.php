@@ -73,8 +73,8 @@ final class Todo extends AbstractAggregateRoot implements AggregateRootDeletable
 
     public function changeDescription(?Description $newDescription): void
     {
-        $previousDescriptionValue = $this->description instanceof \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description ? $this->description->value() : null;
-        $newDescriptionValue = $newDescription instanceof \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description ? $newDescription->value() : null;
+        $previousDescriptionValue = $this->description instanceof Description ? $this->description->value() : null;
+        $newDescriptionValue = $newDescription instanceof Description ? $newDescription->value() : null;
 
         if ($previousDescriptionValue !== $newDescriptionValue) {
             $this->recordThat(TodoDescriptionChanged::create($this->id(), $this->description, $newDescription));

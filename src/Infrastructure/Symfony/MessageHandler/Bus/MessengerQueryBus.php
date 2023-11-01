@@ -40,7 +40,7 @@ final class MessengerQueryBus implements QueryBus
         /** @var HandledStamp|null $handledStamp */
         $handledStamp = $envelope->last(HandledStamp::class);
 
-        if (! $handledStamp instanceof \Symfony\Component\Messenger\Stamp\HandledStamp) {
+        if (! $handledStamp instanceof HandledStamp) {
             throw new LogicException(sprintf(
                 'At least one handler for "%s" should exists',
                 \get_class($envelope->getMessage())
