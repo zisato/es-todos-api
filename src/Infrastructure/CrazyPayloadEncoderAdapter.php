@@ -32,13 +32,4 @@ class CrazyPayloadEncoderAdapter implements PayloadEncoderAdapterInterface
 
         return $payload;
     }
-
-    public function forget(string $aggregateId, PayloadKeyCollection $payloadKeyCollection, array $payload): array
-    {
-        foreach (array_reverse($this->payloadEncoderAdapters) as $payloadEncoderAdapter) {
-            $payload = $payloadEncoderAdapter->forget($aggregateId, $payloadKeyCollection, $payload);
-        }
-
-        return $payload;
-    }
 }
