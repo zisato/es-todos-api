@@ -14,12 +14,13 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Zisato\EventSourcing\Aggregate\Identity\UUID;
 
+/**
+ * @covers \EsTodosApi\Application\Todo\Command\CreateTodo\CreateTodoCommandHandler
+ */
 class CreateTodoCommandHandlerTest extends TestCase
 {
-    /** @var TodoRepository|MockObject $todoRepository */
-    private $todoRepository;
-    /** @var UserRepository|MockObject $userRepository */
-    private $userRepository;
+    private TodoRepository|MockObject $todoRepository;
+    private UserRepository|MockObject $userRepository;
     private CreateTodoCommandHandler $commandHandler;
 
     protected function setUp(): void

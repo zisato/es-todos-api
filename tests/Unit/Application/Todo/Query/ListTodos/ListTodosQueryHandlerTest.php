@@ -15,10 +15,12 @@ use PHPUnit\Framework\TestCase;
 use Zisato\EventSourcing\Aggregate\Identity\UUID;
 use Zisato\Projection\ValueObject\ProjectionModelCollection;
 
+/**
+ * @covers \EsTodosApi\Application\Todo\Query\ListTodos\ListTodosQueryHandler
+ */
 class ListTodosQueryHandlerTest extends TestCase
 {
-    /** @var TodoProjectionRepository|MockObject $todoProjectionRepository */
-    private $todoProjectionRepository;
+    private TodoProjectionRepository|MockObject $todoProjectionRepository;
     private ListTodosQueryHandler $queryHandler;
 
     protected function setUp(): void

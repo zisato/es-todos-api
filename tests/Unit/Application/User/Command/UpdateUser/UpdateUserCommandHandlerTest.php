@@ -12,10 +12,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Zisato\EventSourcing\Aggregate\Identity\UUID;
 
+/**
+ * @covers \EsTodosApi\Application\User\Command\UpdateUser\UpdateUserCommandHandler
+ */
 class UpdateUserCommandHandlerTest extends TestCase
 {
-    /** @var UserRepository|MockObject $userRepository */
-    private $userRepository;
+    private UserRepository|MockObject $userRepository;
     private UpdateUserCommandHandler $commandHandler;
 
     protected function setUp(): void

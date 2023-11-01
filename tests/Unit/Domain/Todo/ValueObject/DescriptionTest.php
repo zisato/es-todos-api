@@ -8,6 +8,9 @@ use EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description
+ */
 class DescriptionTest extends TestCase
 {
     /**

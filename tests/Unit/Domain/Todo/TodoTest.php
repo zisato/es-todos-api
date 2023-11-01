@@ -11,6 +11,9 @@ use PHPUnit\Framework\TestCase;
 use Zisato\EventSourcing\Aggregate\Identity\UUID;
 use Zisato\EventSourcing\Identity\IdentityInterface;
 
+/**
+ * @covers \EsTodosApi\Domain\Todo\WriteModel\Todo
+ */
 class TodoTest extends TestCase
 {
     /**

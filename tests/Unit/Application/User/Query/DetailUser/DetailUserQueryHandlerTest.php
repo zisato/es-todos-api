@@ -14,10 +14,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Zisato\EventSourcing\Aggregate\Identity\UUID;
 
+/**
+ * @covers \EsTodosApi\Application\User\Query\DetailUser\DetailUserQueryHandler
+ */
 class DetailUserQueryHandlerTest extends TestCase
 {
-    /** @var UserProjectionRepository|MockObject $userProjectionRepository */
-    private $userProjectionRepository;
+    private UserProjectionRepository|MockObject $userProjectionRepository;
     private DetailUserQueryHandler $queryHandler;
 
     protected function setUp(): void

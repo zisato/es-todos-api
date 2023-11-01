@@ -18,7 +18,7 @@ final class TodoCreatedV2Upcaster implements UpcasterInterface
 
     public function canUpcast(EventInterface $event): bool
     {
-        return $event->version() === self::VERSION_FROM;
+        return $event instanceof TodoCreated && $event->version() === self::VERSION_FROM;
     }
 
     public function upcast(EventInterface $event): TodoCreated

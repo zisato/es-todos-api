@@ -8,6 +8,9 @@ use EsTodosApi\Domain\User\WriteModel\ValueObject\Name;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \EsTodosApi\Domain\User\WriteModel\ValueObject\Name
+ */
 class NameTest extends TestCase
 {
     /**

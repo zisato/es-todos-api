@@ -11,6 +11,9 @@ use PHPUnit\Framework\TestCase;
 use Zisato\EventSourcing\Aggregate\Identity\UUID;
 use Zisato\EventSourcing\Identity\IdentityInterface;
 
+/**
+ * @covers \EsTodosApi\Domain\User\WriteModel\User
+ */
 class UserTest extends TestCase
 {
     /**
