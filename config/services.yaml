@@ -72,9 +72,11 @@ services:
         arguments:
             - '@event.bus'
 
-    EsTodosApi\Infrastructure\CrazyPrivateDataPayloadService:
-        arguments:
-            - '@Zisato\EventSourcing\Aggregate\Event\PrivateData\Service\CryptoPrivateDataPayloadService'
-            - '@Zisato\EventSourcing\Aggregate\Event\PrivateData\Service\ExternalPrivateDataPayloadService'
+    EsTodosApi\Infrastructure\ExceptionHandler\LoggerExceptionHandlerService:
+        decorates: Zisato\ApiBundle\Infrastructure\Symfony\ExceptionHandler\ExceptionHandlerService
+        arguments: ['@.inner', '@logger']
 
-    Zisato\EventSourcing\Aggregate\Event\PrivateData\Service\PrivateDataPayloadServiceInterface: '@EsTodosApi\Infrastructure\CrazyPrivateDataPayloadService'
+    EsTodosApi\Infrastructure\CrazyPayloadEncoderAdapter:
+        arguments:
+            - '@Zisato\EventSourcing\Aggregate\Event\PrivateData\Adapter\CryptoPayloadEncoderAdapter'
+            - '@Zisato\EventSourcing\Aggregate\Event\PrivateData\Adapter\ExternalPayloadEncoderAdapter'
