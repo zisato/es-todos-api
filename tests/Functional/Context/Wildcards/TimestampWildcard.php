@@ -2,7 +2,7 @@
 
 namespace EsTodosApi\Tests\Functional\Context\Wildcards;
 
-class TimestampWildcard implements Wildcard
+final class TimestampWildcard implements Wildcard
 {
     public function regex(): string
     {
@@ -11,7 +11,7 @@ class TimestampWildcard implements Wildcard
 
     public function handle(array $matches): \Closure
     {
-        return \Closure::fromCallable(function () use ($matches) {
+        return \Closure::fromCallable(static function () use ($matches) : int {
             return (new \DateTime($matches[1]))->getTimestamp();
         });
     }

@@ -28,15 +28,6 @@ trait WildcardsTrait
         $value = str_replace($search, $replace, $value);
         
         return $this->handleWildcards($value);
-/*
-        $search = ['(', ')', '[', ']', '+', '.'];
-        $replace = ['\(', '\)', '\[', '\]', '\+', '\.'];
-        
-        //$search = ['(', ')', '[', ']', '+', '.', '$$placeholder$$'];
-        //$replace = ['\(', '\)', '\[', '\]', '\+', '\.', '(.*?)'];
-
-        return str_replace($search, $replace, $value);
-*/
     }
 
     private function handleWildcards(string $value): string
@@ -46,9 +37,8 @@ trait WildcardsTrait
             if (preg_match($wildcard->regex(), $value) > 0) {
                 $value = preg_replace_callback(
                     $wildcard->regex(), 
-                    function ($matches) use ($wildcard) {
+                    static function ($matches) use ($wildcard) {
                         $callable = $wildcard->handle($matches);
-
                         return $callable();
                     },
                     $value

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 use EsTodosApi\Tests\Functional\Context\Wildcards\WildcardsTrait;
 
-class MainContext implements Context
+final class MainContext implements Context
 {
     use WildcardsTrait {
         WildcardsTrait::__construct as private __wilcardsConstruct;
@@ -21,9 +21,13 @@ class MainContext implements Context
     const MONGODB_DATABASE_NAME = 'es_todos_api';
 
     private static KernelInterface $kernel;
+
     private static Connection $doctrine;
+
     private static Response $response;
+
     private static Client $mongodb;
+
     private static array $headers;
 
     public function __construct(
@@ -32,12 +36,12 @@ class MainContext implements Context
         Client $mongodb
     ) {
         $this->__wilcardsConstruct();
-        
+
         self::$kernel = $kernel;
         self::$doctrine = $doctrine;
         self::$mongodb = $mongodb;
         self::$headers = [];
-        
+
         self::$mongodb->dropDatabase(self::MONGODB_DATABASE_NAME);
     }
 
@@ -79,7 +83,7 @@ class MainContext implements Context
      * @param PyStringNode $string
      * @throws \Exception
      */
-    public function iCallWithBody($verb, $path, PyStringNode $string = null): void
+    public function iCallWithBody(string $verb, string $path, PyStringNode $string = null): void
     {
         $request = Request::create(
             $path,
@@ -88,7 +92,7 @@ class MainContext implements Context
             [],
             [],
             [],
-            $string ? $string->getRaw() : null
+            $string instanceof \Behat\Gherkin\Node\PyStringNode ? $string->getRaw() : null
         );
 
         $request->headers->add(self::$headers);
@@ -166,10 +170,10 @@ class MainContext implements Context
             $value = filter_var($value, FILTER_VALIDATE_BOOL);
         }
 
-        if (substr($value, 0, 1) === '[' && substr($value, strlen($value) - 1) === ']') {
-            $value = json_decode(str_replace("'", '"', $value), true);
+        if (substr((string) $value, 0, 1) === '[' && substr((string) $value, strlen((string) $value) - 1) === ']') {
+            $value = json_decode(str_replace("'", '"', (string) $value), true);
         }
-        
+
         Assert::assertEquals($value, $currentValue);
     }
 }

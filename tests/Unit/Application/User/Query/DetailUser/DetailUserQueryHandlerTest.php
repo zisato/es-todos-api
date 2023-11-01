@@ -17,9 +17,10 @@ use Zisato\EventSourcing\Aggregate\Identity\UUID;
 /**
  * @covers \EsTodosApi\Application\User\Query\DetailUser\DetailUserQueryHandler
  */
-class DetailUserQueryHandlerTest extends TestCase
+final class DetailUserQueryHandlerTest extends TestCase
 {
     private UserProjectionRepository|MockObject $userProjectionRepository;
+
     private DetailUserQueryHandler $queryHandler;
 
     protected function setUp(): void

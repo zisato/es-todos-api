@@ -15,9 +15,10 @@ use Zisato\EventSourcing\Aggregate\Identity\UUID;
 /**
  * @covers \EsTodosApi\Application\User\Command\UpdateUser\UpdateUserCommandHandler
  */
-class UpdateUserCommandHandlerTest extends TestCase
+final class UpdateUserCommandHandlerTest extends TestCase
 {
     private UserRepository|MockObject $userRepository;
+
     private UpdateUserCommandHandler $commandHandler;
 
     protected function setUp(): void

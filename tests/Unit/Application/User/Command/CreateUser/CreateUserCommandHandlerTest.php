@@ -14,9 +14,10 @@ use Zisato\EventSourcing\Aggregate\Identity\UUID;
 /**
  * @covers \EsTodosApi\Application\User\Command\CreateUser\CreateUserCommandHandler
  */
-class CreateUserCommandHandlerTest extends TestCase
+final class CreateUserCommandHandlerTest extends TestCase
 {
     private UserRepository|MockObject $userRepository;
+
     private CreateUserCommandHandler $commandHandler;
 
     protected function setUp(): void
@@ -33,7 +34,7 @@ class CreateUserCommandHandlerTest extends TestCase
 
         $this->userRepository->expects($this->once())
             ->method('save')
-            ->willReturnCallback(function (User $user) use ($id) {
+            ->willReturnCallback(function (User $user) use ($id): bool {
                 $this->assertEquals($id, $user->id());
 
                 return true;

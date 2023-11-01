@@ -18,7 +18,7 @@ use Zisato\EventSourcing\Aggregate\Identity\UUID;
  */
 final class TodoCreatedV2UpcasterTest extends TestCase
 {
-    private readonly UpcasterInterface $upcaster;
+    private UpcasterInterface $upcaster;
 
     protected function setUp(): void
     {

@@ -13,7 +13,7 @@ use Zisato\EventSourcing\Aggregate\Identity\UUID;
 /**
  * @covers \EsTodosApi\Domain\User\ReadModel\UserProjectionModel
  */
-class UserProjectionModelTest extends TestCase
+final class UserProjectionModelTest extends TestCase
 {
     public function testCreateSuccessfully(): void
     {

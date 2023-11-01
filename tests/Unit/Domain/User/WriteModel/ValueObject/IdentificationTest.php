@@ -11,12 +11,12 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \EsTodosApi\Domain\User\WriteModel\ValueObject\Identification
  */
-class IdentificationTest extends TestCase
+final class IdentificationTest extends TestCase
 {
     /**
      * @dataProvider getInvalidData
      */
-    public function testItShouldThrowInvalidArgumentExceptionWhenInvalidValue(string $value)
+    public function testItShouldThrowInvalidArgumentExceptionWhenInvalidValue(string $value): void
     {
         $this->expectException(InvalidArgumentException::class);
 
@@ -26,7 +26,7 @@ class IdentificationTest extends TestCase
     /**
      * @dataProvider getEqualsData
      */
-    public function testEquals(string $identificationValue, string $anotherIdentificationValue, bool $expectedResult)
+    public function testEquals(string $identificationValue, string $anotherIdentificationValue, bool $expectedResult): void
     {
         $identification = Identification::fromValue($identificationValue);
         $anotherIdentification = Identification::fromValue($anotherIdentificationValue);

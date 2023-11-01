@@ -15,9 +15,10 @@ use Zisato\EventSourcing\Aggregate\Identity\UUID;
 /**
  * @covers \EsTodosApi\Application\Todo\Command\UpdateTodo\UpdateTodoCommandHandler
  */
-class UpdateTodoCommandHandlerTest extends TestCase
+final class UpdateTodoCommandHandlerTest extends TestCase
 {
     private TodoRepository|MockObject $todoRepository;
+
     private UpdateTodoCommandHandler $commandHandler;
 
     protected function setUp(): void

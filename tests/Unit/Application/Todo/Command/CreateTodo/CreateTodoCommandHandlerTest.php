@@ -17,10 +17,12 @@ use Zisato\EventSourcing\Aggregate\Identity\UUID;
 /**
  * @covers \EsTodosApi\Application\Todo\Command\CreateTodo\CreateTodoCommandHandler
  */
-class CreateTodoCommandHandlerTest extends TestCase
+final class CreateTodoCommandHandlerTest extends TestCase
 {
     private TodoRepository|MockObject $todoRepository;
+
     private UserRepository|MockObject $userRepository;
+
     private CreateTodoCommandHandler $commandHandler;
 
     protected function setUp(): void
@@ -44,7 +46,7 @@ class CreateTodoCommandHandlerTest extends TestCase
 
         $this->todoRepository->expects($this->once())
             ->method('save')
-            ->willReturnCallback(function (Todo $todo) use ($id) {
+            ->willReturnCallback(function (Todo $todo) use ($id): bool {
                 $this->assertEquals($id, $todo->id());
 
                 return true;

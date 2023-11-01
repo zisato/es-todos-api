@@ -17,9 +17,10 @@ use Zisato\EventSourcing\Aggregate\Identity\UUID;
 /**
  * @covers \EsTodosApi\Application\Todo\Query\DetailTodo\DetailTodoQueryHandler
  */
-class DetailTodoQueryHandlerTest extends TestCase
+final class DetailTodoQueryHandlerTest extends TestCase
 {
     private TodoProjectionRepository|MockObject $todoProjectionRepository;
+
     private DetailTodoQueryHandler $queryHandler;
 
     protected function setUp(): void

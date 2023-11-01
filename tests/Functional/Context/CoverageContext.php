@@ -9,7 +9,7 @@ use SebastianBergmann\CodeCoverage\Driver\PcovDriver;
 use SebastianBergmann\CodeCoverage\Filter;
 use SebastianBergmann\CodeCoverage\Report\PHP;
 
-class CoverageContext implements Context
+final class CoverageContext implements Context
 {
     const INCLUDE_DIRS = [
         __DIR__ . '/../../../src',

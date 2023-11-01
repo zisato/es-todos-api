@@ -18,9 +18,10 @@ use Zisato\Projection\ValueObject\ProjectionModelCollection;
 /**
  * @covers \EsTodosApi\Application\User\Query\ListUsers\ListUsersQueryHandler
  */
-class ListUsersQueryHandlerTest extends TestCase
+final class ListUsersQueryHandlerTest extends TestCase
 {
     private UserProjectionRepository|MockObject $userProjectionRepository;
+
     private ListUsersQueryHandler $queryHandler;
 
     protected function setUp(): void

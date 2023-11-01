@@ -14,7 +14,7 @@ use Zisato\EventSourcing\Identity\IdentityInterface;
 /**
  * @covers \EsTodosApi\Domain\Todo\WriteModel\Todo
  */
-class TodoTest extends TestCase
+final class TodoTest extends TestCase
 {
     /**
      * @dataProvider getCreateSuccessfullyData
@@ -54,10 +54,12 @@ class TodoTest extends TestCase
     {
         $todo = Todo::create(UUID::generate(), UUID::generate(), Title::fromValue('Todo title'), Description::fromValue('Todo description'));
         $todo->releaseRecordedEvents();
+
         $expectedCount = 1;
 
         $todo->delete();
         $todo->delete();
+
         $events = $todo->releaseRecordedEvents();
 
         $this->assertEquals($expectedCount, $events->count());

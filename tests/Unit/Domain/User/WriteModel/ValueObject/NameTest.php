@@ -11,12 +11,12 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \EsTodosApi\Domain\User\WriteModel\ValueObject\Name
  */
-class NameTest extends TestCase
+final class NameTest extends TestCase
 {
     /**
      * @dataProvider getInvalidData
      */
-    public function testItShouldThrowInvalidArgumentExceptionWhenInvalidValue(string $value)
+    public function testItShouldThrowInvalidArgumentExceptionWhenInvalidValue(string $value): void
     {
         $this->expectException(InvalidArgumentException::class);
 
@@ -26,7 +26,7 @@ class NameTest extends TestCase
     /**
      * @dataProvider getEqualsData
      */
-    public function testEquals(string $nameValue, string $anotherNameValue, bool $expectedResult)
+    public function testEquals(string $nameValue, string $anotherNameValue, bool $expectedResult): void
     {
         $name = Name::fromValue($nameValue);
         $anotherName = Name::fromValue($anotherNameValue);

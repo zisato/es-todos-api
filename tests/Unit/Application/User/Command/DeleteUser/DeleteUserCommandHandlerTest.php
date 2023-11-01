@@ -15,9 +15,10 @@ use Zisato\EventSourcing\Aggregate\Identity\UUID;
 /**
  * @covers \EsTodosApi\Application\User\Command\DeleteUser\DeleteUserCommandHandler
  */
-class DeleteUserCommandHandlerTest extends TestCase
+final class DeleteUserCommandHandlerTest extends TestCase
 {
     private UserRepository|MockObject $userRepository;
+
     private DeleteUserCommandHandler $commandHandler;
 
     protected function setUp(): void
@@ -40,7 +41,7 @@ class DeleteUserCommandHandlerTest extends TestCase
 
         $command = new DeleteUserCommand($id->value());
         $this->commandHandler->__invoke($command);
-        
+
         $this->assertEquals($expectedIsDeleted, $user->isDeleted());
     }
 }

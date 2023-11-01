@@ -14,7 +14,7 @@ use Zisato\EventSourcing\Identity\IdentityInterface;
 /**
  * @covers \EsTodosApi\Domain\User\WriteModel\User
  */
-class UserTest extends TestCase
+final class UserTest extends TestCase
 {
     /**
      * @dataProvider getCreateSuccessfullyData
@@ -25,7 +25,7 @@ class UserTest extends TestCase
         Name $name
     ): void {
         $user = User::create($aggregateId, $identification, $name);
-        
+
         $this->assertEquals($user->id(), $aggregateId);
         $this->assertEquals($user->identification(), $identification);
         $this->assertEquals($user->name(), $name);
@@ -52,10 +52,12 @@ class UserTest extends TestCase
     {
         $user = User::create(UUID::generate(), Identification::fromValue('User identification'), Name::fromValue('User name'));
         $user->releaseRecordedEvents();
+
         $expectedCount = 1;
 
         $user->delete();
         $user->delete();
+
         $events = $user->releaseRecordedEvents();
 
         $this->assertEquals($expectedCount, $events->count());

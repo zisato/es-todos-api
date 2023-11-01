@@ -15,7 +15,7 @@ use Zisato\EventSourcing\Aggregate\Identity\UUID;
 /**
  * @covers \EsTodosApi\Domain\Todo\ReadModel\TodoProjectionModel
  */
-class TodoProjectionModelTest extends TestCase
+final class TodoProjectionModelTest extends TestCase
 {
     public function testCreateSuccessfully(): void
     {

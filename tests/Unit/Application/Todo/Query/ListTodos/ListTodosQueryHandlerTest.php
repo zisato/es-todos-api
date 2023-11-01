@@ -18,9 +18,10 @@ use Zisato\Projection\ValueObject\ProjectionModelCollection;
 /**
  * @covers \EsTodosApi\Application\Todo\Query\ListTodos\ListTodosQueryHandler
  */
-class ListTodosQueryHandlerTest extends TestCase
+final class ListTodosQueryHandlerTest extends TestCase
 {
     private TodoProjectionRepository|MockObject $todoProjectionRepository;
+
     private ListTodosQueryHandler $queryHandler;
 
     protected function setUp(): void

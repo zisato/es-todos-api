@@ -2,7 +2,7 @@
 
 namespace EsTodosApi\Tests\Functional\Context\Wildcards;
 
-class PlaceholderWildcard implements Wildcard
+final class PlaceholderWildcard implements Wildcard
 {
     public function regex(): string
     {
@@ -11,7 +11,7 @@ class PlaceholderWildcard implements Wildcard
 
     public function handle(array $matches): \Closure
     {
-        return \Closure::fromCallable(function () {
+        return \Closure::fromCallable(static function () : string {
             return '"(.*?)"';
         });
     }

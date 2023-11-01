@@ -8,7 +8,7 @@ use EsTodosApi\Tests\Functional\Context\Wildcards\WildcardsTrait;
 use EsTodosApi\Application\Todo\Command\CreateTodo\CreateTodoCommand;
 use Zisato\CQRS\WriteModel\Service\CommandBus;
 
-class TodoContext implements Context
+final class TodoContext implements Context
 {
     use WildcardsTrait {
         WildcardsTrait::__construct as private __wilcardsConstruct;

@@ -15,9 +15,10 @@ use Zisato\EventSourcing\Aggregate\Identity\UUID;
 /**
  * @covers \EsTodosApi\Application\Todo\Command\DeleteTodo\DeleteTodoCommandHandler
  */
-class DeleteTodoCommandHandlerTest extends TestCase
+final class DeleteTodoCommandHandlerTest extends TestCase
 {
     private TodoRepository|MockObject $todoRepository;
+
     private DeleteTodoCommandHandler $commandHandler;
 
     protected function setUp(): void
@@ -39,7 +40,7 @@ class DeleteTodoCommandHandlerTest extends TestCase
 
         $command = new DeleteTodoCommand($id->value());
         $this->commandHandler->__invoke($command);
-        
+
         $this->assertEquals($expectedIsDeleted, $todo->isDeleted());
     }
 }
