@@ -9,13 +9,11 @@ use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Zisato\EventSourcing\Aggregate\Event\Bus\EventBusInterface;
 use Zisato\EventSourcing\Aggregate\Event\EventInterface;
 
-class MessengerEventBus implements EventBusInterface
+final class MessengerEventBus implements EventBusInterface
 {
-    private MessageBusInterface $eventBus;
-
-    public function __construct(MessageBusInterface $eventBus)
-    {
-        $this->eventBus = $eventBus;
+    public function __construct(
+        private readonly MessageBusInterface $eventBus
+    ) {
     }
 
     public function handle(EventInterface $event): void

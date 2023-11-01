@@ -10,7 +10,10 @@ use EsTodosApi\Infrastructure\MessageHandler\EventHandler;
 
 final class OnUserNameChangedChangedUpdateTodoProjection implements EventHandler
 {
-    public function __construct(private readonly UserProjectionRepository $userProjectionRepository) {}
+    public function __construct(
+        private readonly UserProjectionRepository $userProjectionRepository
+    ) {
+    }
 
     public function __invoke(UserNameChanged $event): void
     {

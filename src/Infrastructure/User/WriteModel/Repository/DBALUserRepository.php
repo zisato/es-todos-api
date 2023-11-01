@@ -9,7 +9,7 @@ use EsTodosApi\Domain\User\WriteModel\User;
 use Zisato\EventSourcing\Aggregate\Repository\AggregateRootRepositoryWithSnapshot;
 use Zisato\EventSourcing\Identity\IdentityInterface;
 
-class DBALUserRepository extends AggregateRootRepositoryWithSnapshot implements UserRepository
+final class DBALUserRepository extends AggregateRootRepositoryWithSnapshot implements UserRepository
 {
     public function get(IdentityInterface $aggregateId): User
     {

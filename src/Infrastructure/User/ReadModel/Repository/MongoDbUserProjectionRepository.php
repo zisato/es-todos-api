@@ -12,10 +12,10 @@ use Zisato\Projection\Criteria\CriteriaItem;
 use Zisato\Projection\Infrastructure\MongoDB\Repository\MongoDBRepository;
 use Zisato\Projection\ValueObject\ProjectionModelCollection;
 
-class MongoDbUserProjectionRepository extends MongoDBRepository implements UserProjectionRepository
+final class MongoDbUserProjectionRepository extends MongoDBRepository implements UserProjectionRepository
 {
     private const DATABASE_NAME = 'es_todos_api';
-    
+
     private const COLLECTION_NAME = 'users';
 
     public static function getProjectionModelName(): string

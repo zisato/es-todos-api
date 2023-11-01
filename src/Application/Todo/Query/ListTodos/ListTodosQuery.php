@@ -6,7 +6,7 @@ namespace EsTodosApi\Application\Todo\Query\ListTodos;
 
 use Zisato\CQRS\ReadModel\ValueObject\ListableQuery;
 
-class ListTodosQuery implements ListableQuery
+final class ListTodosQuery implements ListableQuery
 {
     /**
      * @var int

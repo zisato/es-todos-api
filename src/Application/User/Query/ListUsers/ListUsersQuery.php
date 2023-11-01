@@ -6,7 +6,7 @@ namespace EsTodosApi\Application\User\Query\ListUsers;
 
 use Zisato\CQRS\ReadModel\ValueObject\ListableQuery;
 
-class ListUsersQuery implements ListableQuery
+final class ListUsersQuery implements ListableQuery
 {
     /**
      * @var int

@@ -6,15 +6,15 @@ namespace EsTodosApi\Domain\User\WriteModel\ValueObject;
 
 use InvalidArgumentException;
 
-class Name
+final class Name
 {
     private const LENGTH_MAX = 255;
 
     private const LENGTH_MIN = 1;
 
-    private string $value;
+    private readonly string $value;
 
-    protected function __construct(string $value)
+    private function __construct(string $value)
     {
         $this->checkValidValue($value);
 
@@ -33,7 +33,7 @@ class Name
 
     public function equals(self $title): bool
     {
-        return $this->value() === $title->value();
+        return $this->value === $title->value();
     }
 
     private function checkValidValue(string $value): void

@@ -10,10 +10,13 @@ use Zisato\ApiBundle\Infrastructure\Service\RequestBodyServiceInterface;
 use Zisato\ApiBundle\Infrastructure\Symfony\Service\ResponseService;
 use Zisato\CQRS\WriteModel\Service\CommandBus;
 
-class CreateUserController
+final class CreateUserController
 {
-    public function execute(RequestBodyServiceInterface $requestBodyService, CommandBus $commandBus, ResponseService $responseService): Response
-    {
+    public function execute(
+        RequestBodyServiceInterface $requestBodyService,
+        CommandBus $commandBus,
+        ResponseService $responseService
+    ): Response {
         $requestData = $requestBodyService->requestBody('user/create.json');
 
         $command = new CreateUserCommand(

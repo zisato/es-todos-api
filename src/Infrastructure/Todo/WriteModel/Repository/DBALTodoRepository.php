@@ -9,7 +9,7 @@ use EsTodosApi\Domain\Todo\WriteModel\Todo;
 use Zisato\EventSourcing\Aggregate\Repository\AggregateRootRepositoryWithSnapshot;
 use Zisato\EventSourcing\Identity\IdentityInterface;
 
-class DBALTodoRepository extends AggregateRootRepositoryWithSnapshot implements TodoRepository
+final class DBALTodoRepository extends AggregateRootRepositoryWithSnapshot implements TodoRepository
 {
     public function get(IdentityInterface $aggregateId): Todo
     {

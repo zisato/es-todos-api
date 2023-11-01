@@ -9,13 +9,10 @@ use EsTodosApi\Domain\User\WriteModel\ValueObject\Name;
 use Zisato\EventSourcing\Identity\IdentityInterface;
 use Zisato\Projection\ValueObject\ProjectionModel;
 
-class UserProjectionModel extends ProjectionModel
+final class UserProjectionModel extends ProjectionModel
 {
-    public static function create(
-        IdentityInterface $id,
-        Identification $identification,
-        Name $name
-    ): self {
+    public static function create(IdentityInterface $id, Identification $identification, Name $name): self
+    {
         /** @var UserProjectionModel $result */
         $result = static::fromData([
             'id' => $id->value(),

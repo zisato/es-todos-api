@@ -8,7 +8,7 @@ use EsTodosApi\Domain\Todo\WriteModel\Event\TodoCreated;
 use Zisato\EventSourcing\Aggregate\Event\EventInterface;
 use Zisato\EventSourcing\Aggregate\Event\Upcast\UpcasterInterface;
 
-class TodoCreatedV2Upcaster implements UpcasterInterface
+final class TodoCreatedV2Upcaster implements UpcasterInterface
 {
     private const INDEX_DESCRIPTION = 'description';
 

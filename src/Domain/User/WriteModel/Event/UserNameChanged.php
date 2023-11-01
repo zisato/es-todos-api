@@ -8,7 +8,7 @@ use EsTodosApi\Domain\User\WriteModel\ValueObject\Name;
 use Zisato\EventSourcing\Aggregate\Event\AbstractEvent;
 use Zisato\EventSourcing\Identity\IdentityInterface;
 
-class UserNameChanged extends AbstractEvent
+final class UserNameChanged extends AbstractEvent
 {
     private const DEFAULT_VERSION = 1;
 
@@ -28,7 +28,7 @@ class UserNameChanged extends AbstractEvent
             $aggregateId->value(),
             [
                 self::INDEX_PREVIOUS_VALUE => $previousName->value(),
-                self::INDEX_NEW_VALUE => $newName->value()
+                self::INDEX_NEW_VALUE => $newName->value(),
             ]
         );
 

@@ -1,20 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace EsTodosApi\Infrastructure;
 
 use Zisato\EventSourcing\Aggregate\Event\PrivateData\Adapter\PayloadEncoderAdapterInterface;
 use Zisato\EventSourcing\Aggregate\Event\PrivateData\ValueObject\PayloadKeyCollection;
 
-class CrazyPayloadEncoderAdapter implements PayloadEncoderAdapterInterface
+final class CrazyPayloadEncoderAdapter implements PayloadEncoderAdapterInterface
 {
-    private array $payloadEncoderAdapters;
+    private readonly array $payloadEncoderAdapters;
 
     public function __construct(PayloadEncoderAdapterInterface ...$payloadEncoderAdapters)
     {
         $this->payloadEncoderAdapters = $payloadEncoderAdapters;
     }
 
-    
     public function show(string $aggregateId, PayloadKeyCollection $payloadKeyCollection, array $payload): array
     {
         foreach (array_reverse($this->payloadEncoderAdapters) as $payloadEncoderAdapter) {

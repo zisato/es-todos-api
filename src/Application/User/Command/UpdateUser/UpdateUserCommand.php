@@ -6,9 +6,13 @@ namespace EsTodosApi\Application\User\Command\UpdateUser;
 
 use Zisato\CQRS\WriteModel\ValueObject\Command;
 
-class UpdateUserCommand implements Command
+final class UpdateUserCommand implements Command
 {
-    public function __construct(private readonly string $id, private readonly string $name) {}
+    public function __construct(
+        private readonly string $id,
+        private readonly string $name
+    ) {
+    }
 
     public function id(): string
     {

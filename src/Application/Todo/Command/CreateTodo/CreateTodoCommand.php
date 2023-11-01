@@ -6,14 +6,15 @@ namespace EsTodosApi\Application\Todo\Command\CreateTodo;
 
 use Zisato\CQRS\WriteModel\ValueObject\Command;
 
-class CreateTodoCommand implements Command
+final class CreateTodoCommand implements Command
 {
     public function __construct(
         private readonly string $id,
         private readonly string $userId,
         private readonly string $title,
         private readonly ?string $description
-    ) {}
+    ) {
+    }
 
     public function id(): string
     {

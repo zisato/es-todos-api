@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace EsTodosApi\Application\Todo\Transformer;
 
+use EsTodosApi\Domain\Todo\ReadModel\TodoProjectionModel;
 use Zisato\Projection\Transformer\ProjectionModelTransformer;
 use Zisato\Projection\ValueObject\ProjectionModel;
-use EsTodosApi\Domain\Todo\ReadModel\TodoProjectionModel;
 
 final class TodoJsonApiTransformer implements ProjectionModelTransformer
 {
@@ -24,8 +26,8 @@ final class TodoJsonApiTransformer implements ProjectionModelTransformer
             'relationships' => [
                 'user' => [
                     'id' => $projectionModel->userId(),
-                ]
-            ]
+                ],
+            ],
         ];
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace EsTodosApi\Infrastructure\Symfony\MessageHandler\Bus;
 
+use LogicException;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Exception\DelayedMessageHandlingException;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
@@ -13,13 +14,11 @@ use Zisato\CQRS\ReadModel\Service\QueryBus;
 use Zisato\CQRS\ReadModel\ValueObject\Query;
 use Zisato\CQRS\ReadModel\ValueObject\QueryResult;
 
-class MessengerQueryBus implements QueryBus
+final class MessengerQueryBus implements QueryBus
 {
-    private MessageBusInterface $queryBus;
-
-    public function __construct(MessageBusInterface $queryBus)
-    {
-        $this->queryBus = $queryBus;
+    public function __construct(
+        private readonly MessageBusInterface $queryBus
+    ) {
     }
 
     public function ask(Query $query): QueryResult
@@ -41,8 +40,8 @@ class MessengerQueryBus implements QueryBus
         /** @var HandledStamp|null $handledStamp */
         $handledStamp = $envelope->last(HandledStamp::class);
 
-        if ($handledStamp === null) {
-            throw new \LogicException(sprintf(
+        if (! $handledStamp instanceof \Symfony\Component\Messenger\Stamp\HandledStamp) {
+            throw new LogicException(sprintf(
                 'At least one handler for "%s" should exists',
                 \get_class($envelope->getMessage())
             ));

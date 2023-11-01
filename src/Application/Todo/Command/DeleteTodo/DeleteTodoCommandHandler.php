@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace EsTodosApi\Application\Todo\Command\DeleteTodo;
 
-use Zisato\EventSourcing\Aggregate\Identity\UUID;
 use EsTodosApi\Domain\Todo\WriteModel\Repository\TodoRepository;
 use Zisato\CQRS\WriteModel\Service\CommandHandler;
+use Zisato\EventSourcing\Aggregate\Identity\UUID;
 
-class DeleteTodoCommandHandler implements CommandHandler
+final class DeleteTodoCommandHandler implements CommandHandler
 {
-    private TodoRepository $todoRepository;
-
-    public function __construct(TodoRepository $todoRepository)
-    {
-        $this->todoRepository = $todoRepository;
+    public function __construct(
+        private readonly TodoRepository $todoRepository
+    ) {
     }
 
     public function __invoke(DeleteTodoCommand $command): void

@@ -7,7 +7,7 @@ namespace EsTodosApi\Domain\Todo\WriteModel\Event;
 use Zisato\EventSourcing\Aggregate\Event\AbstractEvent;
 use Zisato\EventSourcing\Identity\IdentityInterface;
 
-class TodoDeleted extends AbstractEvent
+final class TodoDeleted extends AbstractEvent
 {
     private const DEFAULT_VERSION = 1;
 

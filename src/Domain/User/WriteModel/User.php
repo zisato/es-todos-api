@@ -7,13 +7,13 @@ namespace EsTodosApi\Domain\User\WriteModel;
 use EsTodosApi\Domain\User\WriteModel\Event\UserCreated;
 use EsTodosApi\Domain\User\WriteModel\Event\UserDeleted;
 use EsTodosApi\Domain\User\WriteModel\Event\UserNameChanged;
-use EsTodosApi\Domain\User\WriteModel\ValueObject\Name;
 use EsTodosApi\Domain\User\WriteModel\ValueObject\Identification;
+use EsTodosApi\Domain\User\WriteModel\ValueObject\Name;
 use Zisato\EventSourcing\Aggregate\AbstractAggregateRoot;
 use Zisato\EventSourcing\Aggregate\AggregateRootDeletableInterface;
 use Zisato\EventSourcing\Identity\IdentityInterface;
 
-class User extends AbstractAggregateRoot implements AggregateRootDeletableInterface
+final class User extends AbstractAggregateRoot implements AggregateRootDeletableInterface
 {
     private Identification $identification;
 
@@ -50,17 +50,15 @@ class User extends AbstractAggregateRoot implements AggregateRootDeletableInterf
 
     public function delete(): void
     {
-        if ($this->isDeleted() === false) {
+        if (! $this->isDeleted) {
             $this->recordThat(UserDeleted::create($this->id()));
         }
     }
 
     public function changeName(Name $newName): void
     {
-        if ($this->name()->equals($newName) === false) {
-            $this->recordThat(
-                UserNameChanged::create($this->id(), $this->name(), $newName)
-            );
+        if (! $this->name->equals($newName)) {
+            $this->recordThat(UserNameChanged::create($this->id(), $this->name, $newName));
         }
     }
 

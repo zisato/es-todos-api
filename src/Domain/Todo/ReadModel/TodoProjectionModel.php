@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace EsTodosApi\Domain\Todo\ReadModel;
 
-use EsTodosApi\Domain\Todo\WriteModel\ValueObject\Title;
 use EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description;
+use EsTodosApi\Domain\Todo\WriteModel\ValueObject\Title;
 use Zisato\EventSourcing\Identity\IdentityInterface;
 use Zisato\Projection\ValueObject\ProjectionModel;
 
-class TodoProjectionModel extends ProjectionModel
+final class TodoProjectionModel extends ProjectionModel
 {
     public static function create(
         IdentityInterface $id,
@@ -22,7 +22,7 @@ class TodoProjectionModel extends ProjectionModel
             'id' => $id->value(),
             'userId' => $userId->value(),
             'title' => $title->value(),
-            'description' => $description
+            'description' => $description instanceof \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description
                 ? $description->value()
                 : null,
         ]);
@@ -63,7 +63,7 @@ class TodoProjectionModel extends ProjectionModel
     {
         $newData = $this->data();
 
-        $description = $newDescription ? $newDescription->value() : null;
+        $description = $newDescription instanceof \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description ? $newDescription->value() : null;
         $newData['description'] = $description;
 
         $this->changeData($newData);

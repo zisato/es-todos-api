@@ -8,9 +8,12 @@ use EsTodosApi\Application\Todo\Transformer\TodoJsonApiTransformer;
 use EsTodosApi\Domain\Todo\ReadModel\Repository\TodoProjectionRepository;
 use Zisato\CQRS\ReadModel\Service\QueryHandler;
 
-class ListTodosQueryHandler implements QueryHandler
+final class ListTodosQueryHandler implements QueryHandler
 {
-    public function __construct(private readonly TodoProjectionRepository $todoProjectionRepository) {}
+    public function __construct(
+        private readonly TodoProjectionRepository $todoProjectionRepository
+    ) {
+    }
 
     public function __invoke(ListTodosQuery $query): ListTodosQueryResult
     {
@@ -18,6 +21,11 @@ class ListTodosQueryHandler implements QueryHandler
 
         $todosCollection = $this->todoProjectionRepository->findAll($offset, $query->perPage());
 
-        return ListTodosQueryResult::create($todosCollection, new TodoJsonApiTransformer(), $query->page(), $query->perPage());
+        return ListTodosQueryResult::create(
+            $todosCollection,
+            new TodoJsonApiTransformer(),
+            $query->page(),
+            $query->perPage()
+        );
     }
 }

@@ -12,13 +12,13 @@ use Zisato\EventSourcing\Infrastructure\Aggregate\Event\PrivateData\Repository\D
 use Zisato\EventSourcing\Infrastructure\Aggregate\Event\Store\DBALEventStore;
 use Zisato\EventSourcing\Infrastructure\Aggregate\Snapshot\Store\DBALSnapshotStore;
 
-class Version20230612200000 extends AbstractMigration
+final class Version20230612200000 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
         $this->abortIf(
-            !$this->connection->getDatabasePlatform() instanceof MySQLPlatform,
-            'Migration can only be executed safely on \'mysql\'.'
+            ! $this->connection->getDatabasePlatform() instanceof MySQLPlatform,
+            "Migration can only be executed safely on 'mysql'."
         );
 
         $this->addSql(DBALEventStore::TABLE_SCHEMA);
@@ -30,8 +30,8 @@ class Version20230612200000 extends AbstractMigration
     public function down(Schema $schema): void
     {
         $this->abortIf(
-            !$this->connection->getDatabasePlatform() instanceof MySQLPlatform,
-            'Migration can only be executed safely on \'mysql\'.'
+            ! $this->connection->getDatabasePlatform() instanceof MySQLPlatform,
+            "Migration can only be executed safely on 'mysql'."
         );
 
         $this->addSql('DROP TABLE ' . DBALEventStore::TABLE_NAME);

@@ -6,13 +6,11 @@ namespace EsTodosApi\Application\Todo\Command\DeleteTodo;
 
 use Zisato\CQRS\WriteModel\ValueObject\Command;
 
-class DeleteTodoCommand implements Command
+final class DeleteTodoCommand implements Command
 {
-    private string $id;
-
-    public function __construct(string $id)
-    {
-        $this->id = $id;
+    public function __construct(
+        private readonly string $id
+    ) {
     }
 
     public function id(): string

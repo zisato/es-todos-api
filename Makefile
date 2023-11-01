@@ -53,7 +53,7 @@ bash:
 ###
 ### Composer
 composer:
-	@docker exec $(PHP_CONTAINER_ID) composer $(ARGUMENTS)
+	@$(DOCKER_COMPOSE) run --rm --remove-orphans --no-deps --env COMPOSER_MEMORY_LIMIT=-1 php composer $(ARGUMENTS)
 
 ###
 ### Symfony
@@ -99,10 +99,10 @@ phpstan:
 	@$(DOCKER_COMPOSE_TEST) run --rm --no-deps php bin/phpstan
 
 rector:
-	@$(DOCKER_COMPOSE_TEST) run --rm --no-deps php bin/rector process src --dry-run
+	@$(DOCKER_COMPOSE_TEST) run --rm --no-deps php bin/rector process src
 
 ecs:
-	@$(DOCKER_COMPOSE_TEST) run --rm --no-deps php bin/ecs check src
+	@$(DOCKER_COMPOSE_TEST) run --rm --no-deps php bin/ecs check src --fix
 
 code.quality: rector ecs phpstan
 

@@ -6,19 +6,13 @@ namespace EsTodosApi\Application\Todo\Command\UpdateTodo;
 
 use Zisato\CQRS\WriteModel\ValueObject\Command;
 
-class UpdateTodoCommand implements Command
+final class UpdateTodoCommand implements Command
 {
-    private string $id;
-
-    private string $title;
-
-    private ?string $description;
-
-    public function __construct(string $id, string $title, ?string $description)
-    {
-        $this->id = $id;
-        $this->title = $title;
-        $this->description = $description;
+    public function __construct(
+        private readonly string $id,
+        private readonly string $title,
+        private readonly ?string $description
+    ) {
     }
 
     public function id(): string

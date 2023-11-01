@@ -14,7 +14,7 @@ use Zisato\EventSourcing\Aggregate\AbstractAggregateRoot;
 use Zisato\EventSourcing\Aggregate\AggregateRootDeletableInterface;
 use Zisato\EventSourcing\Identity\IdentityInterface;
 
-class Todo extends AbstractAggregateRoot implements AggregateRootDeletableInterface
+final class Todo extends AbstractAggregateRoot implements AggregateRootDeletableInterface
 {
     private IdentityInterface $userId;
 
@@ -59,27 +59,25 @@ class Todo extends AbstractAggregateRoot implements AggregateRootDeletableInterf
 
     public function delete(): void
     {
-        if ($this->isDeleted() === false) {
+        if (! $this->isDeleted) {
             $this->recordThat(TodoDeleted::create($this->id()));
         }
     }
 
     public function changeTitle(Title $newTitle): void
     {
-        if ($this->title()->equals($newTitle) === false) {
-            $this->recordThat(TodoTitleChanged::create($this->id(), $this->title(), $newTitle));
+        if (! $this->title->equals($newTitle)) {
+            $this->recordThat(TodoTitleChanged::create($this->id(), $this->title, $newTitle));
         }
     }
 
     public function changeDescription(?Description $newDescription): void
     {
-        $previousDescriptionValue = $this->description ? $this->description->value() : null;
-        $newDescriptionValue = $newDescription ? $newDescription->value() : null;
+        $previousDescriptionValue = $this->description instanceof \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description ? $this->description->value() : null;
+        $newDescriptionValue = $newDescription instanceof \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description ? $newDescription->value() : null;
 
         if ($previousDescriptionValue !== $newDescriptionValue) {
-            $this->recordThat(
-                TodoDescriptionChanged::create($this->id(), $this->description, $newDescription)
-            );
+            $this->recordThat(TodoDescriptionChanged::create($this->id(), $this->description, $newDescription));
         }
     }
 

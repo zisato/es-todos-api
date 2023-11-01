@@ -11,13 +11,11 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Zisato\CQRS\WriteModel\Service\CommandBus;
 use Zisato\CQRS\WriteModel\ValueObject\Command;
 
-class MessengerCommandBus implements CommandBus
+final class MessengerCommandBus implements CommandBus
 {
-    private MessageBusInterface $commandBus;
-
-    public function __construct(MessageBusInterface $commandBus)
-    {
-        $this->commandBus = $commandBus;
+    public function __construct(
+        private readonly MessageBusInterface $commandBus
+    ) {
     }
 
     public function handle(Command $command): void

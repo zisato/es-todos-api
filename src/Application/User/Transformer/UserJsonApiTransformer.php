@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace EsTodosApi\Application\User\Transformer;
 
+use EsTodosApi\Domain\User\ReadModel\UserProjectionModel;
 use Zisato\Projection\Transformer\ProjectionModelTransformer;
 use Zisato\Projection\ValueObject\ProjectionModel;
-use EsTodosApi\Domain\User\ReadModel\UserProjectionModel;
 
 final class UserJsonApiTransformer implements ProjectionModelTransformer
 {

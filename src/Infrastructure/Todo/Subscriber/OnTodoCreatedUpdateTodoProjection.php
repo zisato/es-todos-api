@@ -10,18 +10,21 @@ use EsTodosApi\Domain\Todo\WriteModel\Event\TodoCreated;
 use EsTodosApi\Infrastructure\MessageHandler\EventHandler;
 use Zisato\EventSourcing\Aggregate\Identity\UUID;
 
-class OnTodoCreatedUpdateTodoProjection implements EventHandler
+final class OnTodoCreatedUpdateTodoProjection implements EventHandler
 {
-    private TodoProjectionRepository $todoProjectionRepository;
-
-    public function __construct(TodoProjectionRepository $todoProjectionRepository)
-    {
-        $this->todoProjectionRepository = $todoProjectionRepository;
+    public function __construct(
+        private readonly TodoProjectionRepository $todoProjectionRepository
+    ) {
     }
 
     public function __invoke(TodoCreated $event): void
     {
-        $todo = TodoProjectionModel::create(UUID::fromString($event->aggregateId()), $event->userId(), $event->title(), $event->description());
+        $todo = TodoProjectionModel::create(
+            UUID::fromString($event->aggregateId()),
+            $event->userId(),
+            $event->title(),
+            $event->description()
+        );
 
         $this->todoProjectionRepository->save($todo);
     }

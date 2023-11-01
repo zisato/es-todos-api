@@ -8,7 +8,7 @@ use EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description;
 use Zisato\EventSourcing\Aggregate\Event\AbstractEvent;
 use Zisato\EventSourcing\Identity\IdentityInterface;
 
-class TodoDescriptionChanged extends AbstractEvent
+final class TodoDescriptionChanged extends AbstractEvent
 {
     private const DEFAULT_VERSION = 1;
 
@@ -21,16 +21,19 @@ class TodoDescriptionChanged extends AbstractEvent
         return self::DEFAULT_VERSION;
     }
 
-    public static function create(IdentityInterface $aggregateId, ?Description $previousDescription, ?Description $newDescription): self
-    {
+    public static function create(
+        IdentityInterface $aggregateId,
+        ?Description $previousDescription,
+        ?Description $newDescription
+    ): self {
         /** @var TodoDescriptionChanged $event */
         $event = self::occur(
             $aggregateId->value(),
             [
-                self::INDEX_PREVIOUS_VALUE => $previousDescription
+                self::INDEX_PREVIOUS_VALUE => $previousDescription instanceof \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description
                     ? $previousDescription->value()
                     : null,
-                self::INDEX_NEW_VALUE => $newDescription
+                self::INDEX_NEW_VALUE => $newDescription instanceof \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description
                     ? $newDescription->value()
                     : null,
             ]

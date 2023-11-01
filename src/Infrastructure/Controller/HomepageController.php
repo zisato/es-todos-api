@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace EsTodosApi\Infrastructure\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
-class HomepageController
+final class HomepageController
 {
     public function execute(): Response
     {

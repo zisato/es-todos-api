@@ -8,7 +8,10 @@ use Zisato\CQRS\ReadModel\ValueObject\Query;
 
 final class DetailTodoQuery implements Query
 {
-    public function __construct(private readonly string $id) {}
+    public function __construct(
+        private readonly string $id
+    ) {
+    }
 
     public function id(): string
     {

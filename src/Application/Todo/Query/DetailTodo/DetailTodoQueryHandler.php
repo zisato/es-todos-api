@@ -11,7 +11,10 @@ use Zisato\CQRS\ReadModel\ValueObject\QueryResult;
 
 final class DetailTodoQueryHandler implements QueryHandler
 {
-    public function __construct(private readonly TodoProjectionRepository $todoProjectionRepository) {}
+    public function __construct(
+        private readonly TodoProjectionRepository $todoProjectionRepository
+    ) {
+    }
 
     public function __invoke(DetailTodoQuery $query): QueryResult
     {

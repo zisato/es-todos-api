@@ -10,10 +10,14 @@ use Zisato\ApiBundle\Infrastructure\Service\RequestBodyServiceInterface;
 use Zisato\ApiBundle\Infrastructure\Symfony\Service\ResponseService;
 use Zisato\CQRS\WriteModel\Service\CommandBus;
 
-class UpdateTodoController
+final class UpdateTodoController
 {
-    public function execute(string $id, RequestBodyServiceInterface $requestBodyService, CommandBus $commandBus, ResponseService $responseService): Response
-    {
+    public function execute(
+        string $id,
+        RequestBodyServiceInterface $requestBodyService,
+        CommandBus $commandBus,
+        ResponseService $responseService
+    ): Response {
         $requestData = $requestBodyService->requestBody('todo/update.json');
 
         $command = new UpdateTodoCommand(

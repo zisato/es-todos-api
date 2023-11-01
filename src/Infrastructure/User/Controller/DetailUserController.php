@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Zisato\ApiBundle\Infrastructure\Symfony\Service\ResponseService;
 use Zisato\CQRS\ReadModel\Service\QueryBus;
 
-class DetailUserController
+final class DetailUserController
 {
     public function execute(string $id, QueryBus $queryBus, ResponseService $responseService): Response
     {

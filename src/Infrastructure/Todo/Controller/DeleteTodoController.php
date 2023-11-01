@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Zisato\ApiBundle\Infrastructure\Symfony\Service\ResponseService;
 use Zisato\CQRS\WriteModel\Service\CommandBus;
 
-class DeleteTodoController
+final class DeleteTodoController
 {
     public function execute(string $id, CommandBus $commandBus, ResponseService $responseService): Response
     {

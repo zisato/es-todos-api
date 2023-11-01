@@ -12,7 +12,7 @@ use Zisato\EventSourcing\Aggregate\Event\PrivateData\ValueObject\PayloadKey;
 use Zisato\EventSourcing\Aggregate\Event\PrivateData\ValueObject\PayloadKeyCollection;
 use Zisato\EventSourcing\Identity\IdentityInterface;
 
-class UserCreated extends AbstractEvent implements PrivateDataPayloadInterface
+final class UserCreated extends AbstractEvent implements PrivateDataPayloadInterface
 {
     private const DEFAULT_VERSION = 1;
 
@@ -35,7 +35,7 @@ class UserCreated extends AbstractEvent implements PrivateDataPayloadInterface
             $aggregateId->value(),
             [
                 self::INDEX_IDENTIFICATION => $identification->value(),
-                self::INDEX_NAME => $name->value()
+                self::INDEX_NAME => $name->value(),
             ]
         );
 
@@ -44,9 +44,7 @@ class UserCreated extends AbstractEvent implements PrivateDataPayloadInterface
 
     public function privateDataPayloadKeys(): PayloadKeyCollection
     {
-        return PayloadKeyCollection::create(
-            PayloadKey::create(self::INDEX_IDENTIFICATION)
-        );
+        return PayloadKeyCollection::create(PayloadKey::create(self::INDEX_IDENTIFICATION));
     }
 
     public function identification(): Identification

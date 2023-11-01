@@ -11,7 +11,10 @@ use EsTodosApi\Domain\User\WriteModel\ValueObject\Identification;
 
 final class UserProjectionRepositoryUserIdentificationService implements UserIdentificationService
 {
-    public function __construct(private readonly UserProjectionRepository $userProjectionRepository) {}
+    public function __construct(
+        private readonly UserProjectionRepository $userProjectionRepository
+    ) {
+    }
 
     public function existsIdentification(Identification $identification): bool
     {

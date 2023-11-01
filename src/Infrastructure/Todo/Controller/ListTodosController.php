@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace EsTodosApi\Infrastructure\Todo\Controller;
 
 use EsTodosApi\Application\Todo\Query\ListTodos\ListTodosQuery;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Zisato\ApiBundle\Infrastructure\Symfony\Service\ResponseService;
 use Zisato\CQRS\ReadModel\Service\QueryBus;
 use Zisato\CQRS\ReadModel\ValueObject\ListableQueryResult;
 
-class ListTodosController
+final class ListTodosController
 {
     public function execute(Request $request, QueryBus $queryBus, ResponseService $responseService): Response
     {

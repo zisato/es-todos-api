@@ -10,7 +10,10 @@ use EsTodosApi\Infrastructure\MessageHandler\EventHandler;
 
 final class OnTodoDescriptionChangedUpdateTodoProjection implements EventHandler
 {
-    public function __construct(private readonly TodoProjectionRepository $todoProjectionRepository) {}
+    public function __construct(
+        private readonly TodoProjectionRepository $todoProjectionRepository
+    ) {
+    }
 
     public function __invoke(TodoDescriptionChanged $event): void
     {

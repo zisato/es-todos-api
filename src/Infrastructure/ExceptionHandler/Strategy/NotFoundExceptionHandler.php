@@ -11,13 +11,11 @@ use Zisato\ApiBundle\Infrastructure\Service\ResponseServiceInterface;
 use Zisato\EventSourcing\Aggregate\Exception\AggregateRootNotFoundException;
 use Zisato\Projection\Exception\ProjectionModelNotFoundException;
 
-class NotFoundExceptionHandler implements ExceptionHandlerStrategyInterface
+final class NotFoundExceptionHandler implements ExceptionHandlerStrategyInterface
 {
-    private ResponseServiceInterface $responseService;
-
-    public function __construct(ResponseServiceInterface $responseService)
-    {
-        $this->responseService = $responseService;
+    public function __construct(
+        private readonly ResponseServiceInterface $responseService
+    ) {
     }
 
     public function canHandle(Throwable $exception): bool

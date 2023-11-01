@@ -13,16 +13,19 @@ final class DetailTodoQueryResult implements QueryResult
     /**
      * @param array<int, mixed> $data
      */
-    private function __construct(private readonly array $data) {}
+    private function __construct(
+        private readonly array $data
+    ) {
+    }
 
     public static function create(
         ProjectionModel $projectionModel,
         ProjectionModelTransformer $transformer
-    ): DetailTodoQueryResult {
+    ): self {
         /** @var array<int, mixed> $data */
         $data = $transformer->transform($projectionModel);
 
-        return new DetailTodoQueryResult($data);
+        return new self($data);
     }
 
     public function data(): array

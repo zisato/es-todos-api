@@ -10,16 +10,17 @@ use Zisato\ApiBundle\Infrastructure\Service\RequestBodyServiceInterface;
 use Zisato\ApiBundle\Infrastructure\Symfony\Service\ResponseService;
 use Zisato\CQRS\WriteModel\Service\CommandBus;
 
-class UpdateUserController
+final class UpdateUserController
 {
-    public function execute(string $id, RequestBodyServiceInterface $requestBodyService, CommandBus $commandBus, ResponseService $responseService): Response
-    {
+    public function execute(
+        string $id,
+        RequestBodyServiceInterface $requestBodyService,
+        CommandBus $commandBus,
+        ResponseService $responseService
+    ): Response {
         $requestData = $requestBodyService->requestBody('user/update.json');
 
-        $command = new UpdateUserCommand(
-            $id,
-            $requestData['data']['attributes']['name']
-        );
+        $command = new UpdateUserCommand($id, $requestData['data']['attributes']['name']);
 
         $commandBus->handle($command);
 

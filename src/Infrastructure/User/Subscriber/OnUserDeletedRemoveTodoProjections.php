@@ -11,7 +11,10 @@ use EsTodosApi\Infrastructure\MessageHandler\EventHandler;
 
 final class OnUserDeletedRemoveTodoProjections implements EventHandler
 {
-    public function __construct(private readonly TodoProjectionRepository $todoProjectionRepository) {}
+    public function __construct(
+        private readonly TodoProjectionRepository $todoProjectionRepository
+    ) {
+    }
 
     public function __invoke(UserDeleted $event): void
     {

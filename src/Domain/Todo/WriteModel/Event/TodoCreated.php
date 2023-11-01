@@ -10,7 +10,7 @@ use Zisato\EventSourcing\Aggregate\Event\AbstractEvent;
 use Zisato\EventSourcing\Aggregate\Identity\UUID;
 use Zisato\EventSourcing\Identity\IdentityInterface;
 
-class TodoCreated extends AbstractEvent
+final class TodoCreated extends AbstractEvent
 {
     private const DEFAULT_VERSION = 2;
 
@@ -37,7 +37,7 @@ class TodoCreated extends AbstractEvent
             [
                 self::INDEX_USER_ID => $userId->value(),
                 self::INDEX_TITLE => $title->value(),
-                self::INDEX_DESCRIPTION => $description
+                self::INDEX_DESCRIPTION => $description instanceof \EsTodosApi\Domain\Todo\WriteModel\ValueObject\Description
                     ? $description->value()
                     : null,
             ]

@@ -11,7 +11,10 @@ use Zisato\CQRS\ReadModel\ValueObject\QueryResult;
 
 final class DetailUserQueryHandler implements QueryHandler
 {
-    public function __construct(private readonly UserProjectionRepository $userProjectionRepository) {}
+    public function __construct(
+        private readonly UserProjectionRepository $userProjectionRepository
+    ) {
+    }
 
     public function __invoke(DetailUserQuery $query): QueryResult
     {

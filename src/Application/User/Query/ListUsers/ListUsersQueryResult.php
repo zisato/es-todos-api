@@ -8,7 +8,7 @@ use Zisato\CQRS\ReadModel\ValueObject\ListableQueryResult;
 use Zisato\Projection\Transformer\ProjectionModelTransformer;
 use Zisato\Projection\ValueObject\ProjectionModelCollection;
 
-class ListUsersQueryResult implements ListableQueryResult
+final class ListUsersQueryResult implements ListableQueryResult
 {
     /**
      * @param array<int, mixed> $data
@@ -19,14 +19,15 @@ class ListUsersQueryResult implements ListableQueryResult
         private readonly int $page,
         private readonly int $perPage,
         private readonly int $totalPages
-    ) {}
+    ) {
+    }
 
     public static function create(
         ProjectionModelCollection $collection,
         ProjectionModelTransformer $transformer,
         int $page,
         int $perPage
-    ): ListUsersQueryResult {
+    ): self {
         /** @var array<int, mixed> $data */
         $data = [];
         foreach ($collection->data() as $projectionModel) {
@@ -36,7 +37,7 @@ class ListUsersQueryResult implements ListableQueryResult
         $totalItems = $collection->total();
         $totalPages = (int) \ceil($totalItems / $perPage);
 
-        return new ListUsersQueryResult($data, $totalItems, $page, $perPage, $totalPages);
+        return new self($data, $totalItems, $page, $perPage, $totalPages);
     }
 
     public function data(): array

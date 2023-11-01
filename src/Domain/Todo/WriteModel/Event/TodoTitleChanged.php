@@ -8,7 +8,7 @@ use EsTodosApi\Domain\Todo\WriteModel\ValueObject\Title;
 use Zisato\EventSourcing\Aggregate\Event\AbstractEvent;
 use Zisato\EventSourcing\Identity\IdentityInterface;
 
-class TodoTitleChanged extends AbstractEvent
+final class TodoTitleChanged extends AbstractEvent
 {
     private const DEFAULT_VERSION = 1;
 
