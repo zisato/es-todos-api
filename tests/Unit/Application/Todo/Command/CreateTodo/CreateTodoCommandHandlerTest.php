@@ -5,10 +5,10 @@ namespace EsTodosApi\Tests\Unit\Application\Todo\Command\CreateTodo;
 use EsTodosApi\Application\Todo\Command\CreateTodo\CreateTodoCommandHandler;
 use EsTodosApi\Application\Todo\Command\CreateTodo\CreateTodoCommand;
 use EsTodosApi\Domain\Todo\WriteModel\Repository\TodoRepository;
+use EsTodosApi\Domain\Todo\WriteModel\Todo;
 use EsTodosApi\Domain\User\WriteModel\Repository\UserRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Zisato\EventSourcing\Aggregate\Exception\AggregateRootNotFoundException;
 use Zisato\EventSourcing\Aggregate\Identity\UUID;
 
 class CreateTodoCommandHandlerTest extends TestCase
@@ -26,7 +26,7 @@ class CreateTodoCommandHandlerTest extends TestCase
         $this->commandHandler = new CreateTodoCommandHandler($this->todoRepository, $this->userRepository);
     }
 
-    public function testShouldCallTodoRepositoryGetWithArguments(): void
+    public function testShouldCreateTodo(): void
     {
         $id = UUID::generate();
         $userId = '9f303847-2bcb-4d24-ad34-450187474041';
@@ -34,11 +34,12 @@ class CreateTodoCommandHandlerTest extends TestCase
         $description = 'Todo description';
 
         $this->todoRepository->expects($this->once())
-            ->method('get')
-            ->with(
-                $this->equalTo($id)
-            )
-            ->willThrowException(new AggregateRootNotFoundException());
+            ->method('save')
+            ->willReturnCallback(function (Todo $todo) use ($id) {
+                $this->assertEquals($id, $todo->id());
+
+                return true;
+            });
 
         $command = new CreateTodoCommand($id->value(), $userId, $title, $description);
 

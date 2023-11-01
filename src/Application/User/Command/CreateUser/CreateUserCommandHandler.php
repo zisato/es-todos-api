@@ -12,9 +12,6 @@ use EsTodosApi\Domain\User\WriteModel\ValueObject\Name;
 use InvalidArgumentException;
 use Zisato\CQRS\WriteModel\Service\CommandHandler;
 use Zisato\EventSourcing\Aggregate\Identity\UUID;
-use Zisato\EventSourcing\Aggregate\Exception\AggregateRootNotFoundException;
-use Zisato\EventSourcing\Aggregate\Exception\DuplicatedAggregateIdException;
-use Zisato\EventSourcing\Identity\IdentityInterface;
 
 class CreateUserCommandHandler implements CommandHandler
 {
@@ -22,27 +19,12 @@ class CreateUserCommandHandler implements CommandHandler
 
     public function __invoke(CreateUserCommand $command): void
     {
-        $id = UUID::fromString($command->id());
-        $this->assertDuplicatedUserId($id);
-
         $identification = Identification::fromValue($command->identification());
         $this->assertDuplicatedUserIdentification($identification);
 
-        $user = User::create($id, $identification, Name::fromValue($command->name()));
+        $user = User::create(UUID::fromString($command->id()), $identification, Name::fromValue($command->name()));
 
         $this->userRepository->save($user);
-    }
-    
-    private function assertDuplicatedUserId(IdentityInterface $id): void
-    {
-        try {
-            $this->userRepository->get($id);
-
-            throw new DuplicatedAggregateIdException(\sprintf(
-                'User aggregate id %s exists in repository.',
-                $id->value()
-            ));
-        } catch (AggregateRootNotFoundException $exception) {}
     }
 
     private function assertDuplicatedUserIdentification(Identification $identification): void

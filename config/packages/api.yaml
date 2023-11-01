@@ -3,4 +3,5 @@ api:
     enabled: true
     exception_handlers:
       - EsTodosApi\Infrastructure\ExceptionHandler\Strategy\NotFoundExceptionHandler
-      - EsTodosApi\Infrastructure\ExceptionHandler\Strategy\DuplicatedAggregateIdExceptionHandler
+      - EsTodosApi\Infrastructure\ExceptionHandler\Strategy\NotFoundHttpExceptionStrategy
+      - EsTodosApi\Infrastructure\ExceptionHandler\Strategy\UniqueConstraintViolationExceptionStrategy

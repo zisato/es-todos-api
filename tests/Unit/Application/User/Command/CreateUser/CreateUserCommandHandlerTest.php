@@ -10,7 +10,6 @@ use EsTodosApi\Domain\User\WriteModel\ValueObject\Identification;
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Zisato\EventSourcing\Aggregate\Exception\AggregateRootNotFoundException;
 use Zisato\EventSourcing\Aggregate\Identity\UUID;
 
 class CreateUserCommandHandlerTest extends TestCase
@@ -28,36 +27,11 @@ class CreateUserCommandHandlerTest extends TestCase
         $this->commandHandler = new CreateUserCommandHandler($this->userIdentificationService, $this->userRepository);
     }
 
-    public function testShouldCallUserRepositoryGetWithArguments(): void
-    {
-        $id = UUID::generate();
-        $identification = 'User identification';
-        $name = 'User name';
-
-        $this->userRepository->expects($this->once())
-            ->method('get')
-            ->with(
-                $this->equalTo($id)
-            )
-            ->willThrowException(new AggregateRootNotFoundException());
-
-        $command = new CreateUserCommand($id->value(), $identification, $name);
-
-        $this->commandHandler->__invoke($command);
-    }
-
     public function testShouldCallUserServiceExistsIdentificationWithArguments(): void
     {
         $id = UUID::generate();
         $identification = Identification::fromValue('User identification');
         $name = 'User name';
-
-        $this->userRepository->expects($this->once())
-            ->method('get')
-            ->with(
-                $this->equalTo($id)
-            )
-            ->willThrowException(new AggregateRootNotFoundException());
 
         $this->userIdentificationService->expects($this->once())
             ->method('existsIdentification')
@@ -78,13 +52,6 @@ class CreateUserCommandHandlerTest extends TestCase
         $id = UUID::generate();
         $identification = Identification::fromValue('User identification');
         $name = 'User name';
-
-        $this->userRepository->expects($this->once())
-            ->method('get')
-            ->with(
-                $this->equalTo($id)
-            )
-            ->willThrowException(new AggregateRootNotFoundException());
 
         $this->userIdentificationService->expects($this->once())
             ->method('existsIdentification')
