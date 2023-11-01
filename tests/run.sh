@@ -111,11 +111,9 @@ case "$method" in
     ;;
   functional-coverage)
     functionalCoverage $*
-    generateCoverage
     ;;
   unit-coverage)
     unitCoverage $*
-    generateCoverage
     ;;
   *)
     testAll

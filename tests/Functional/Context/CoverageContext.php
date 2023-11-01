@@ -12,7 +12,7 @@ use SebastianBergmann\CodeCoverage\Report\PHP;
 class CoverageContext implements Context
 {
     const INCLUDE_DIRS = [
-        __DIR__ . "/../../../src",
+        __DIR__ . '/../../../src',
     ];
 
     const EXCLUDE = [
@@ -20,7 +20,7 @@ class CoverageContext implements Context
             __DIR__ . '/../../../src/Infrastructure/Doctrine/Migrations',
         ],
         'files' => [
-            __DIR__ . '/../../../src/Infrastructure/Framework/Kernel.php',
+            __DIR__ . '/../../../src/Kernel.php',
         ],
     ];
 
@@ -55,7 +55,7 @@ class CoverageContext implements Context
     {
         $writer = new PHP();
 
-        $writer->process(self::$coverage, __DIR__ . "/../../../build/coverage/behat.cov");
+        $writer->process(self::$coverage, __DIR__ . '/../../../build/coverage/behat.cov');
     }
 
     /**

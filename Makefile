@@ -86,7 +86,7 @@ functional:
 	@$(DOCKER_COMPOSE_TEST) run --rm php tests/run.sh functional
 
 functional.coverage:
-	@$(DOCKER_COMPOSE_TEST) run --rm php tests/run.sh functionalCoverage
+	@$(DOCKER_COMPOSE_TEST) run --rm php tests/run.sh functional-coverage
 
 test: unit functional
 
