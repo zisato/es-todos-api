@@ -11,7 +11,7 @@ class PlaceholderWildcard implements Wildcard
 
     public function handle(array $matches): \Closure
     {
-        return \Closure::fromCallable(function () use ($matches) {
+        return \Closure::fromCallable(function () {
             return '"(.*?)"';
         });
     }

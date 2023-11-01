@@ -10,7 +10,6 @@ use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
-use EsTodosApi\Kernel;
 use EsTodosApi\Tests\Functional\Context\Wildcards\WildcardsTrait;
 
 class MainContext implements Context
@@ -21,7 +20,7 @@ class MainContext implements Context
 
     const MONGODB_DATABASE_NAME = 'es_todos_api';
 
-    private static Kernel $kernel;
+    private static KernelInterface $kernel;
     private static Connection $doctrine;
     private static Response $response;
     private static Client $mongodb;

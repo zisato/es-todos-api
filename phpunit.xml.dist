@@ -23,10 +23,8 @@
       <directory>src</directory>
     </include>
     <exclude>
-      <directory suffix=".php">src/Infrastructure/Framework</directory>
+      <file>src/Infrastructure/Kernel.php</file>
       <directory suffix=".php">src/Infrastructure/Doctrine/Migrations</directory>
-      <directory suffix=".php">src/Infrastructure/MongoDB/Migrations</directory>
-      <directory suffix=".php">src/SharedKernel</directory>
     </exclude>
   </source>
 </phpunit>

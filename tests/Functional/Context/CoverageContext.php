@@ -18,12 +18,9 @@ class CoverageContext implements Context
     const EXCLUDE = [
         'directories' => [
             __DIR__ . '/../../../src/Infrastructure/Doctrine/Migrations',
-            __DIR__ . '/../../../src/Infrastructure/Framework',
-            __DIR__ . '/../../../src/SharedKernel',
-            //__DIR__ . '/../../../src/Infrastructure/MongoDB/Migrations',
         ],
         'files' => [
-            //__DIR__ . '/../../../src/Infrastructure/MongoDB/Command/MongoDBMigrationsCommand.php',
+            __DIR__ . '/../../../src/Infrastructure/Framework/Kernel.php',
         ],
     ];
 
