@@ -7,6 +7,9 @@ use EsTodosApi\Application\Todo\Command\CreateTodo\CreateTodoCommand;
 use EsTodosApi\Domain\Todo\WriteModel\Repository\TodoRepository;
 use EsTodosApi\Domain\Todo\WriteModel\Todo;
 use EsTodosApi\Domain\User\WriteModel\Repository\UserRepository;
+use EsTodosApi\Domain\User\WriteModel\User;
+use EsTodosApi\Domain\User\WriteModel\ValueObject\Identification;
+use EsTodosApi\Domain\User\WriteModel\ValueObject\Name;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Zisato\EventSourcing\Aggregate\Identity\UUID;
@@ -32,6 +35,11 @@ class CreateTodoCommandHandlerTest extends TestCase
         $userId = '9f303847-2bcb-4d24-ad34-450187474041';
         $title = 'Todo title';
         $description = 'Todo description';
+        $user = User::create(UUID::fromString($userId), Identification::fromValue('identification'), Name::fromValue('name'));
+
+        $this->userRepository->expects($this->once())
+            ->method('get')
+            ->willReturn($user);
 
         $this->todoRepository->expects($this->once())
             ->method('save')
